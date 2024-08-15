@@ -8,8 +8,6 @@ phases:
       - npm install
       - cd ..
       - cd frontend
-      - echo "Current directory: $(pwd)"
-      - ls -al
       - npm install
   build:
     commands:
