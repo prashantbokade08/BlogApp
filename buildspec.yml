@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - cd backend && npm install
+      - cd ../frontend && npm install
+  build:
+    commands:
+      - echo Building the frontend...
+      - cd frontend && npm run build
+  post_build:
+    commands:
+      - echo Build complete.
+      - echo Starting deployment process...
+      - cd ..
+      - $(aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 851725307442.dkr.ecr.ap-south-1.amazonaws.com)
+      - docker build -t ecs-blog-docker .
+      - docker tag ecs-blog-docker:latest 851725307442.dkr.ecr.ap-south-1.amazonaws.com/ecs-blog-docker:latest
+      - docker push 851725307442.dkr.ecr.ap-south-1.amazonaws.com/ecs-blog-docker:latest
+      
+      
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
