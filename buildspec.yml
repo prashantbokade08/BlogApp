@@ -4,12 +4,17 @@ phases:
   install:
     commands:
       - echo Installing backend dependencies...
-      - cd backend && npm install
-      - cd ../frontend && echo "Current directory: $(pwd)" && ls -al && npm install
+      - cd backend
+      - npm install
+      - cd ../frontend
+      - echo "Current directory: $(pwd)"
+      - ls -al
+      - npm install
   build:
     commands:
       - echo Building the frontend...
-      - cd frontend && npm run build
+      - cd frontend
+      - npm run build
       - cd ..
       - echo Building Docker image...
       - docker build -t ecs-blog-docker .
