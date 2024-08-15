@@ -6,7 +6,8 @@ phases:
       - echo Installing backend dependencies...
       - cd backend
       - npm install
-      - cd ../frontend
+      - cd ..
+      - cd frontend
       - echo "Current directory: $(pwd)"
       - ls -al
       - npm install
